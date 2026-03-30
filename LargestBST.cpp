@@ -62,7 +62,7 @@ int main() {
     root->left->left = new Node(2);
     root->left->right = new Node(7);
     root->right = new Node(11);
-    root->right->right = new Node(14);
+    root->right->right = new Node(4);
 
     inorder(root);
     cout<<endl;
