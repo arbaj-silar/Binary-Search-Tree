@@ -1,7 +1,6 @@
 #include<iostream>
 #include<vector>
 using namespace std;
-
 class Node {
 public:
     int data;
@@ -13,39 +12,9 @@ public:
         left = right = NULL;
     }
 };
-
-Node* insert(Node* root, int val) {
-    if(root == NULL) return new Node(val);
-
-    if(val<root->data) {
-        root->left = insert(root->left, val);
-    } else {
-        root->right = insert(root->right, val);
-    }
-    return root;
-}
-
-void inorder(Node* root) {
-    if(root == NULL) return;
-    
-    inorder(root->left);
-    cout<<root->data<<" ";
-    inorder(root->right);
-}
-
-Node* buildBST(vector<int>& arr) {
-    Node* root = NULL;
-    
-    for(int val: arr) {
-        root = insert(root, val);
-    }
-    return root;
-}
-
 Node* pres = NULL;
 Node* first = NULL;
 Node* sec = NULL;
-
 void inorderTree(Node* root) {
     if(root == NULL) return;
 
@@ -59,7 +28,6 @@ void inorderTree(Node* root) {
     pres = root;
     inorderTree(root->right);
 }
-
 void recoverTree(Node* root) {
     inorderTree(root);
 
@@ -67,11 +35,24 @@ void recoverTree(Node* root) {
     first->data = sec->data;
     sec->data = temp;
 }
-
+void inorder(Node* root) {
+    if(root == NULL) return;
+    
+    inorder(root->left);
+    cout<<root->data<<" ";
+    inorder(root->right);
+}
 int main() {
-    vector<int> arr = {3, 2, 1, 5, 6, 4};
+    Node* root = new Node(6);
+    root->left = new Node(3);
+    root->left->left = new Node(1);
+    root->left->right = new Node(8);
+    root->right = new Node(4);
+    root->right->right = new Node(9);
 
-    Node* root = buildBST(arr);
+    inorder(root);
+    cout<<endl;
+    recoverTree(root);
     inorder(root);
     return 0;
 }
